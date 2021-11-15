@@ -2,7 +2,11 @@ import {
     AppContainer,
     ColumnContainer,
     ColumnTitle,
-    CardContainer  
+    CardContainer,
+    AddItemButton,
+    NewItemButton,
+    NewItemFormContainer,
+    NewItemInput,  
 } from "./style";
 
 export {
@@ -10,4 +14,8 @@ export {
     CardContainer,
     ColumnContainer,
     ColumnTitle,
+    AddItemButton,
+    NewItemButton,
+    NewItemFormContainer,
+    NewItemInput,
 }

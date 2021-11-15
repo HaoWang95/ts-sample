@@ -1,5 +1,6 @@
 import { ColumnContainer, ColumnTitle } from "../../style";
-import { VFC, PropsWithChildren, ReactNode } from 'react';
+import { VFC, PropsWithChildren } from 'react';
+import { AddNewItem } from "../AddNewItem";
 
 // type React.PropsWithChildren<P> = P & {children ?: React.ReactNode}
 
@@ -8,16 +9,21 @@ type ColumnProps = PropsWithChildren<{
 }>
 
 // Another implementation
-type ColProps = {
-    text: string;
-    children?: ReactNode;
-}
+// type ColProps = {
+//     text: string;
+//     children?: ReactNode;
+// }
 
 export const Column: VFC<ColumnProps> = ({ text, children }: ColumnProps) => {
   return (
     <ColumnContainer>
       <ColumnTitle>{text ? text : "Column Title"}</ColumnTitle>
       {children}
+      <AddNewItem 
+        toggleButtonText="+ Add another task"
+        onAdd={() => console.log("not implemented yet")}
+        dark
+      />
     </ColumnContainer>
   );
 };
