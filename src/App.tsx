@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Calculator } from './components/MathCalculator';
-import { ReactComponent as Logo } from './logo.svg';
+import { AppContainer } from './style';
 
 const basicStyles: React.CSSProperties = {
   backgroundColor: "#5aac44",
@@ -9,8 +8,9 @@ const basicStyles: React.CSSProperties = {
 function App() {
   return (
     <div className="App" style={basicStyles}>
-      <Logo />
-      <Calculator />
+      <AppContainer>
+        
+      </AppContainer>
     </div>
   );
 }
