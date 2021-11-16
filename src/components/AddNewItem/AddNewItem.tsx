@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { AddItemButton } from "../../style";
-import { NewItemForm } from  "."
+import { NewItemForm } from "./NewItemForm";
 
 interface AddItemProps {
   onAdd(text: string): void;
@@ -11,18 +11,25 @@ interface AddItemProps {
 export const AddNewItem = (props: AddItemProps) => {
   const [showForm, setShowForm] = useState<boolean>(false);
   const { onAdd, toggleButtonText, dark } = props;
+
+  const handleAddNew = useCallback(() => {
+    console.log("NewItemButton in AddNewItem is clicked~!");
+    setShowForm(true);
+  }, []);
+
   if (showForm) {
-    // show item creation form here
-    <NewItemForm
-      onAdd={(text) => {
-        onAdd(text);
-        setShowForm(false);
-      }}
-    />;
+    return (
+      <NewItemForm
+        onAdd={(text) => {
+          onAdd(text);
+          setShowForm(false);
+        }}
+      />
+    );
   }
 
   return (
-    <AddItemButton dark={dark} onClick={() => setShowForm(true)}>
+    <AddItemButton dark={dark} onClick={handleAddNew}>
       {toggleButtonText}
     </AddItemButton>
   );

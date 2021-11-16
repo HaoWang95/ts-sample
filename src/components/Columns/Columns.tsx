@@ -20,7 +20,7 @@ export const Column: VFC<ColumnProps> = ({ text, children }: ColumnProps) => {
       <ColumnTitle>{text ? text : "Column Title"}</ColumnTitle>
       {children}
       <AddNewItem 
-        toggleButtonText="+ Add another task"
+        toggleButtonText={`+ Add another task in ${text}`}
         onAdd={() => console.log("not implemented yet")}
         dark
       />
