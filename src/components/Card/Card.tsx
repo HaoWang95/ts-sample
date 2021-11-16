@@ -1,10 +1,10 @@
 import { CardContainer } from "../../style";
-import { VFC } from "react";
 
 type CardProps = {
-  text?: string;
+  text: string;
+  id: string;
 };
 
-export const Card: VFC<CardProps> = ({ text }: CardProps) => {
+export const Card = ({ text, id }: CardProps) => {
   return <CardContainer>{text ? text : "Card Title"}</CardContainer>;
 };

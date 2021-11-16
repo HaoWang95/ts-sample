@@ -1,12 +1,14 @@
 import { ColumnContainer, ColumnTitle } from "../../style";
-import { VFC, PropsWithChildren } from 'react';
 import { AddNewItem } from "../AddNewItem";
+import { useAppGlobalState } from "../../state/AppStateContext";
+import { Card } from "../Card";
 
 // type React.PropsWithChildren<P> = P & {children ?: React.ReactNode}
 
-type ColumnProps = PropsWithChildren<{
+type ColumnProps = {
     text: string;
-}>
+    id: string;
+}
 
 // Another implementation
 // type ColProps = {
@@ -14,11 +16,17 @@ type ColumnProps = PropsWithChildren<{
 //     children?: ReactNode;
 // }
 
-export const Column: VFC<ColumnProps> = ({ text, children }: ColumnProps) => {
+export const Column = ({ text, id }: ColumnProps) => {
+  const { getTaskByListId } = useAppGlobalState();
+
+  const tasks = getTaskByListId(id); 
+  console.log(`In column ${tasks}`);
   return (
     <ColumnContainer>
       <ColumnTitle>{text ? text : "Column Title"}</ColumnTitle>
-      {children}
+      {tasks.map(task => (
+          <Card id={task.id} text={task.text} />
+      ))}
       <AddNewItem 
         toggleButtonText={`+ Add another task in ${text}`}
         onAdd={() => console.log("not implemented yet")}

@@ -1,37 +1,23 @@
-import * as React from 'react';
-import { AppContainer } from './style';
-import { AddNewItem } from './components/AddNewItem';
+import { AppContainer } from "./style";
+import { AddNewItem } from "./components/AddNewItem";
 import { Column } from "./components/Columns";
-import { Card } from "./components/Card";
+import { useAppGlobalState } from "./state/AppStateContext";
 
-const basicStyles: React.CSSProperties = {
-  backgroundColor: "#5aac44",
-}
 
 function App() {
+  const { lists } = useAppGlobalState();
+  console.log(lists);
   return (
-    <div className="App" style={basicStyles}>
-      <AppContainer>
-
-        <Column text="To Do">
-          <Card text="Finish React TypeScript project" />
-        </Column>
-        <Column text="In Progress">
-          <Card text="Spring Security"  />
-          <Card text="React advanced topics" />
-        </Column>
-
-        <Column text="Done">
-          <Card text="Get up on time" />
-        </Column>
-        <AddNewItem 
-          onAdd={function (text: string): void {
-            throw new Error('Function not implemented.');
-          } } 
-          toggleButtonText="+ Add another list"          
-        />
-      </AppContainer>
-    </div>
+    <AppContainer>
+      {lists.map((list) => (
+        <Column id={list.id} text={list.text} key={list.id} />
+      ))}
+      <AddNewItem
+        onAdd={console.log}
+        dark={true}
+        toggleButtonText="+ Add another list"
+      />
+    </AppContainer>
   );
 }
 
