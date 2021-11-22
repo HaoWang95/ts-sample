@@ -9,11 +9,12 @@ function App() {
   console.log(lists);
   return (
     <AppContainer>
-      {lists.map((list) => (
+      <p>Task Planner</p>
+      {lists ? lists.map((list) => (
         <Column id={list.id} text={list.text} key={list.id} />
-      ))}
+      )): "Loading..."}
       <AddNewItem
-        onAdd={console.log}
+        onAdd={() => {console.log("Not implemented")}}
         dark={true}
         toggleButtonText="+ Add another list"
       />

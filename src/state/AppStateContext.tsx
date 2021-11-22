@@ -1,23 +1,11 @@
-import React, { createContext, useContext } from "react";
-
-type Task = {
-  id: string;
-  text: string;
-};
-
-type List = {
-  id: string;
-  text: string;
-  tasks: Task[];
-};
+import React, { createContext, Dispatch, useContext } from "react";
+import { appStateReducer, List, Task, AppState } from "./appStateReducer";
+import { Action } from "./action";
 
 type AppStateContextProps = {
   lists: List[];
   getTaskByListId(id: string): Task[];
-};
-
-export type AppState = {
-  lists: List[];
+  //dispatch: Dispatch<Action>;
 };
 
 const appData: AppState = {
