@@ -1,9 +1,11 @@
-import React, { createContext, Dispatch, useContext, useReducer } from "react";
+import React, { createContext, Dispatch, useContext } from "react";
 import { appStateReducer, List, Task, AppState } from "./appStateReducer";
 import { Action } from "./action";
 import { useImmerReducer } from "use-immer";
+import { DragItem } from "../utils/DragItems";
 
 type AppStateContextProps = {
+  draggedItem: DragItem | null;
   lists: List[];
   getTaskByListId(id: string): Task[];
   dispatch: Dispatch<Action>;
@@ -27,6 +29,7 @@ const appData: AppState = {
       tasks: [{ id: "c3", text: "Basic React and SpringBoot microservices" }],
     },
   ],
+  draggedItem: null,
 };
 
 const AppStateContext = createContext<AppStateContextProps>(
@@ -35,13 +38,13 @@ const AppStateContext = createContext<AppStateContextProps>(
 
 export const AppStateProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useImmerReducer(appStateReducer, appData);
-  const { lists } = state;
+  const { draggedItem, lists } = state;
 
   const getTaskByListId = (id: string) => {
     return lists.find((list) => list.id === id)?.tasks || [];
   };
   return (
-    <AppStateContext.Provider value={{ lists, getTaskByListId, dispatch }}>
+    <AppStateContext.Provider value={{ lists, getTaskByListId, dispatch, draggedItem }}>
       {children}
     </AppStateContext.Provider>
   );
