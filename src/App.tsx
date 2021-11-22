@@ -2,10 +2,11 @@ import { AppContainer } from "./style";
 import { AddNewItem } from "./components/AddNewItem";
 import { Column } from "./components/Columns";
 import { useAppGlobalState } from "./state/AppStateContext";
+import { addList } from "./state/action";
 
 
 function App() {
-  const { lists } = useAppGlobalState();
+  const { lists, dispatch } = useAppGlobalState();
   console.log(lists);
   return (
     <AppContainer>
@@ -14,7 +15,7 @@ function App() {
         <Column id={list.id} text={list.text} key={list.id} />
       )): "Loading..."}
       <AddNewItem
-        onAdd={() => {console.log("Not implemented")}}
+        onAdd={text => dispatch(addList(text))}
         dark={true}
         toggleButtonText="+ Add another list"
       />

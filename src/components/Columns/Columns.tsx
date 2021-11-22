@@ -2,6 +2,7 @@ import { ColumnContainer, ColumnTitle } from "../../style";
 import { AddNewItem } from "../AddNewItem";
 import { useAppGlobalState } from "../../state/AppStateContext";
 import { Card } from "../Card";
+import { addTask } from "../../state/action";
 
 // type React.PropsWithChildren<P> = P & {children ?: React.ReactNode}
 
@@ -17,7 +18,7 @@ type ColumnProps = {
 // }
 
 export const Column = ({ text, id }: ColumnProps) => {
-  const { getTaskByListId } = useAppGlobalState();
+  const { getTaskByListId, dispatch } = useAppGlobalState();
 
   const tasks = getTaskByListId(id); 
   console.log(`In column ${tasks}`);
@@ -29,7 +30,7 @@ export const Column = ({ text, id }: ColumnProps) => {
       ))}
       <AddNewItem 
         toggleButtonText={`+ Add another task in ${text}`}
-        onAdd={() => console.log("not implemented yet")}
+        onAdd={text => dispatch(addTask(text, id))}
         dark
       />
     </ColumnContainer>
