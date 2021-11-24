@@ -44,7 +44,9 @@ export const AppStateProvider: React.FC = ({ children }) => {
     return lists.find((list) => list.id === id)?.tasks || [];
   };
   return (
-    <AppStateContext.Provider value={{ lists, getTaskByListId, dispatch, draggedItem }}>
+    <AppStateContext.Provider
+      value={{ lists, getTaskByListId, dispatch, draggedItem }}
+    >
       {children}
     </AppStateContext.Provider>
   );
